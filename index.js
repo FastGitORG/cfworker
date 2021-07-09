@@ -36,7 +36,7 @@ const PREFLIGHT_INIT = {
  */
 function makeRes(body, status = 200, headers = {}) {
     headers['access-control-allow-origin'] = '*'
-    return new Response(body, {status, headers})
+    return new Response(body, { status, headers })
 }
 
 
@@ -77,13 +77,14 @@ async function fetchHandler(e) {
     const exp3 = /^(?:https?:\/\/)?github\.com\/.+?\/.+?\/(?:info|git-).*$/i
     const exp4 = /^(?:https?:\/\/)?raw\.githubusercontent\.com\/.+?\/.+?\/.+?\/.+$/i
     const exp5 = /^(?:https?:\/\/)?gist\.(?:githubusercontent|github)\.com\/.+?\/.+?\/.+$/i
+    const exp6 = /^(?:https?:\/\/).+?\.github\.com\/+$/i
     if (path.search(exp1) === 0 || path.search(exp5) === 0 || !Config.cnpmjs && (path.search(exp3) === 0 || path.search(exp4) === 0)) {
         return httpHandler(req, path)
     } else if (path.search(exp2) === 0) {
-        if (Config.jsdelivr){
+        if (Config.jsdelivr) {
             const newUrl = path.replace('/blob/', '@').replace(/^(?:https?:\/\/)?github\.com/, 'https://cdn.jsdelivr.net/gh')
             return Response.redirect(newUrl, 302)
-        }else{
+        } else {
             path = path.replace('/blob/', '/raw/')
             return httpHandler(req, path)
         }
@@ -93,7 +94,10 @@ async function fetchHandler(e) {
     } else if (path.search(exp4) === 0) {
         const newUrl = path.replace(/(?<=com\/.+?\/.+?)\/(.+?\/)/, '@$1').replace(/^(?:https?:\/\/)?raw\.githubusercontent\.com/, 'https://cdn.jsdelivr.net/gh')
         return Response.redirect(newUrl, 302)
-    } else {
+    } else if (path.search(exp6) === 0) {
+        return httpHandler(req, path)
+    }
+    else {
         return fetch(ASSET_URL + path)
     }
 }
