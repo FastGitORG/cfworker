@@ -72,6 +72,10 @@ async function fetchHandler(e) {
     }
     // cfworker 会把路径中的 `//` 合并成 `/`
     path = urlObj.href.substr(urlObj.origin.length + PREFIX.length).replace(/^https?:\/+/, 'https://')
+
+    // Convert FastGit To GitHub
+    path = path.replace("https://raw.fastgit.org", "https://raw.githubusercontent.com").replace("https://hub.fastgit.org", "https://github.com").replace("https://download.fastgit.org", "https://github.com").replace("https://archive.fastgit.org", "https://github.com").replace("https://codeload.fastgit.org", "https://codeload.github.com")
+
     const exp1 = /^(?:https?:\/\/)?github\.com\/.+?\/.+?\/(?:releases|archive)\/.*$/i
     const exp2 = /^(?:https?:\/\/)?github\.com\/.+?\/.+?\/(?:blob)\/.*$/i
     const exp3 = /^(?:https?:\/\/)?github\.com\/.+?\/.+?\/(?:info|git-).*$/i
