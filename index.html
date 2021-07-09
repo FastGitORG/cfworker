@@ -42,7 +42,10 @@
     <script>
         function toSubmit(e) {
             e.preventDefault()
-            window.open('/' + document.getElementsByName('q')[0].value);
+            let url = document.getElementsByName('q')[0].value
+            if (!url.startsWith("https://api.github.com")) {
+                window.open('/' + url);
+            }
             return false
         }
     </script>
