@@ -116,8 +116,7 @@ function httpHandler(req, pathname) {
 
     // preflight
     if (req.method === 'OPTIONS' &&
-        reqHdrRaw.has('access-control-request-headers')
-    ) {
+        reqHdrRaw.has('access-control-request-headers')) {
         return new Response(null, PREFLIGHT_INIT)
     }
 
