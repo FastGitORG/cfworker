@@ -2,7 +2,8 @@
  * Original Source: https://github.com/hunshcn/gh-proxy
  * Original License: MIT
  * Orignal Author: GitHub@hunshcn
- * Modifier: @KevinZonda & FastGit UK
+ * Modifier: GitHub@KevinZonda & FastGit UK (GitHub@FastGitORG)
+ * License: MIT
  */
 
 'use strict'
