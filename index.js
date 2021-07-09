@@ -99,7 +99,7 @@ async function fetchHandler(e) {
     } else if (path.search(exp4) === 0) {
         const newUrl = path.replace(/(?<=com\/.+?\/.+?)\/(.+?\/)/, '@$1').replace(/^(?:https?:\/\/)?raw\.githubusercontent\.com/, 'https://cdn.jsdelivr.net/gh')
         return Response.redirect(newUrl, 302)
-    } else if (path.search(exp6) === 0) {
+    } else if (path.search(exp6) === 0 && !path.startsWith('https://api.github.com')) {
         return httpHandler(req, path)
     }
     else {
