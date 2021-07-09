@@ -57,7 +57,7 @@
     <form action="./" method="get" target="_blank" class="flex" onsubmit="toSubmit(event)">
         <label style="width: fit-content">
             <input name="q" type="text" placeholder="GitHub Link"
-                pattern="^((https|http):\/\/)?(github\.com\/.+?\/.+?\/(?:releases|archive|blob)|((?:raw|gist)\.(?:githubusercontent|github)\.com))\/.+$"
+                pattern="^((https|http):\/\/)?(github\.com\/.+?\/.+?\/(?:releases|archive|blob)|((?:raw|gist)\.(?:githubusercontent|github)\.com))\/.|(?:https?:\/\/).+?\.github\.com\/.*+$"
                 required>
         </label>
         <input type="submit" value="Go">
